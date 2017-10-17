@@ -36,6 +36,7 @@ Puppet::Type.type(:rancid_device).provide(:augeas, :parent => Puppet::Type.type(
 
   def create
     augopen! do |aug|
+      aug.defnode('resource', resource_path, nil) # Not sure why this is needed?
       aug.set('$resource', resource[:device])
       aug.set('$resource/type', resource[:type])
       aug.set('$resource/state', resource[:state])
@@ -50,4 +51,7 @@ Puppet::Type.type(:rancid_device).provide(:augeas, :parent => Puppet::Type.type(
   end
 
   attr_aug_accessor(:device, { :label => :resource })
+  attr_aug_accessor(:type)
+  attr_aug_accessor(:state)
+  attr_aug_accessor(:comment)
 end

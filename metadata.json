@@ -1,12 +1,62 @@
 {
-  "dependencies": [
+  "name": "bodgit-rancid",
+  "version": "1.0.0",
+  "author": "bodgit",
+  "summary": "Puppet Module for managing RANCiD",
+  "license": "Apache-2.0",
+  "source": "https://github.com/bodgit/puppet-rancid",
+  "project_page": "https://github.com/bodgit/puppet-rancid",
+  "issues_url": "https://github.com/bodgit/puppet-rancid/issues",
+  "operatingsystem_support": [
     {
-      "name": "camptocamp/augeas",
-      "version_requirement": ">=1.6.1 <2.0.0"
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7"
+      ]
     },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">=3.0.0 <5.0.0"
+    }
+  ],
+  "tags": [
+    "rancid",
+    "cisco",
+    "network",
+    "backup"
+  ],
+  "dependencies": [
     {
       "name": "herculesteam/augeasproviders_core",
       "version_requirement": ">=2.1.0 <3.0.0"
+    },
+    {
+      "name": "bodgit/bodgitlib",
+      "version_requirement": ">=1.6.0 <3.0.0"
+    },
+    {
+      "name": "thrnio/ip",
+      "version_requirement": ">=1.0.0 <2.0.0"
     }
   ]
 }

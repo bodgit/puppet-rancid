@@ -58,4 +58,12 @@ Puppet::Type.newtype(:rancid_device) do
       value.to_s
     end
   end
+
+  newparam(:target) do
+    desc ''
+  end
+
+  autorequire(:file) do
+    self[:target]
+  end
 end
