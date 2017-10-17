@@ -10,13 +10,13 @@ Puppet::Type.type(:rancid_device).provide(:augeas, :parent => Puppet::Type.type(
   resource_path do |resource|
     group = resource[:group]
     device = resource[:device]
-    "$target/*[label() = '#{group}']/router.db/record[device = '#{device}']"
+    "$target/../../*[label() = '#{group}']/router.db/device[. = '#{device}']"
   end
 
   def self.instances
     augopen do |aug|
       resources = []
-      aug.match("$target/*/router.db/*[label()!='#comment']").each do |spath|
+      aug.match("$target/*[label() != '#comment']").each do |spath|
         group = path_label(aug, "#{spath}/../..")
         device = aug.get(spath)
         entry = {
@@ -33,4 +33,21 @@ Puppet::Type.type(:rancid_device).provide(:augeas, :parent => Puppet::Type.type(
       resources
     end
   end
+
+  def create
+    augopen! do |aug|
+      aug.set('$resource', resource[:device])
+      aug.set('$resource/type', resource[:type])
+      aug.set('$resource/state', resource[:state])
+      aug.set('$resource/comment', resource[:comment]) if resource[:comment]
+    end
+  end
+
+  def destroy
+    augopen! do |aug|
+      aug.rm('$resource')
+    end
+  end
+
+  attr_aug_accessor(:device, { :label => :resource })
 end
